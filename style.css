@@ -9,3 +9,17 @@ body {
 img {
     margin-top: 200px;
 }
+
+.cover-area{
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-top:200px;
+}
+
+.menu{
+    margin-right:50px;
+}
