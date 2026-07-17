@@ -1,26 +1,23 @@
-/* Windows 98 风格 */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+/* ============ Windows 98 Style ============ */
 
 body{
+    margin:0;
+    padding:60px;
 
-    background:#C0C0C0;
-    color:#000;
+    background:#c0c0c0;
+
+    color:#111;
 
     font-family:"Times New Roman", serif;
-
-    padding:70px;
 }
+
 
 /* 标题 */
 
 header{
 
     text-align:center;
+
     margin-bottom:70px;
 
 }
@@ -28,12 +25,17 @@ header{
 header h1{
 
     font-size:72px;
-    font-weight:normal;
-    letter-spacing:10px;
+
+    font-weight:400;
+
+    letter-spacing:8px;
+
+    color:#1a1a1a;
 
 }
 
-/* 每个项目 */
+
+/* 项目 */
 
 .project{
 
@@ -41,52 +43,73 @@ header h1{
 
     text-decoration:none;
 
-    color:black;
+    color:#111;
 
-    padding:28px 0;
+    padding:26px 18px;
 
-    border-top:1px solid #7f7f7f;
+    border-top:1px solid #8e8e8e;
 
-    transition:0.25s;
+    transition:
+        background .18s,
+        padding-left .25s;
 
 }
+
+/* 最后一条 */
 
 .project:last-child{
 
-    border-bottom:1px solid #7f7f7f;
+    border-bottom:1px solid #8e8e8e;
 
 }
+
+
+/* hover */
+
+.project:hover{
+
+    background:#d8d8d8;
+
+    padding-left:34px;
+
+}
+
+
+/* 标题 */
 
 .project h2{
 
     font-size:34px;
-    font-weight:normal;
+
+    font-weight:400;
+
+    margin-bottom:6px;
 
     transition:.25s;
 
 }
 
-.project p{
-
-    margin-top:6px;
-
-    font-size:15px;
-
-    color:#4d4d4d;
-
-}
-
-/* 鼠标放上去 */
-
 .project:hover h2{
 
-    transform:scale(1.06);
+    transform:scale(1.03);
 
     transform-origin:left;
 
 }
 
-/* 点击过以后 */
+
+/* 副标题 */
+
+.project p{
+
+    color:#666;
+
+    font-size:15px;
+
+}
+
+
+/* 点击以后 */
 
 .project:visited h2{
 
@@ -94,11 +117,22 @@ header h1{
 
 }
 
-/* 不要蓝色 */
+
+/* 去掉超链接颜色 */
 
 .project:link,
-.project:visited{
+.project:visited,
+.project:active{
 
-    color:black;
+    color:#111;
+
+}
+
+
+/* 鼠标 */
+
+.project{
+
+    cursor:pointer;
 
 }
