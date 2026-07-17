@@ -694,7 +694,7 @@
                 return false;
             }
             
-            if (keyword === '邺山村') {
+            if (keyword === 'ARTHUG') {
                 // 先显示找到结果的提示
                 showToast('找到相关结果，正在跳转...');
                 // 显示加载弹窗
@@ -702,7 +702,7 @@
                 // 模拟加载1.5秒后跳转
                 setTimeout(() => {
                     closeLoading();
-                    window.open('luntan1.html', '_blank');
+                    window.open('ARTHUG.html', '_blank');
                 }, 1500);
             } else {
                 showToast(`搜索“${keyword}”结果：暂无相关内容`);
