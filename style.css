@@ -1,21 +1,104 @@
-body {
-    background: #008080;
-    color: black;
-    text-align: center;
+/* Windows 98 风格 */
 
-    font-family: Tahoma, Arial, sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-.cover-area{
-    display:flex;
+body{
 
-    justify-content:center;
+    background:#C0C0C0;
+    color:#000;
 
-    align-items:center;
+    font-family:"Times New Roman", serif;
 
-    margin-top:200px;
+    padding:70px;
 }
 
-.menu{
-    margin-right:50px;
+/* 标题 */
+
+header{
+
+    text-align:center;
+    margin-bottom:70px;
+
+}
+
+header h1{
+
+    font-size:72px;
+    font-weight:normal;
+    letter-spacing:10px;
+
+}
+
+/* 每个项目 */
+
+.project{
+
+    display:block;
+
+    text-decoration:none;
+
+    color:black;
+
+    padding:28px 0;
+
+    border-top:1px solid #7f7f7f;
+
+    transition:0.25s;
+
+}
+
+.project:last-child{
+
+    border-bottom:1px solid #7f7f7f;
+
+}
+
+.project h2{
+
+    font-size:34px;
+    font-weight:normal;
+
+    transition:.25s;
+
+}
+
+.project p{
+
+    margin-top:6px;
+
+    font-size:15px;
+
+    color:#4d4d4d;
+
+}
+
+/* 鼠标放上去 */
+
+.project:hover h2{
+
+    transform:scale(1.06);
+
+    transform-origin:left;
+
+}
+
+/* 点击过以后 */
+
+.project:visited h2{
+
+    text-decoration:underline;
+
+}
+
+/* 不要蓝色 */
+
+.project:link,
+.project:visited{
+
+    color:black;
+
 }
