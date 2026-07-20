@@ -1,0 +1,210 @@
+.table-logo{
+
+    position:absolute;
+
+    left:50%;
+
+    top:110px;
+
+    transform:translateX(-50%);
+
+    width:900px;
+
+    height:260px;
+
+    pointer-events:none;
+
+    opacity:.13;
+
+}
+
+/* 第一排 */
+
+.table-logo span{
+
+    position:absolute;
+
+    color:#0F7759;
+
+    font-family:'Source Sans Pro',sans-serif;
+
+    font-weight:900;
+
+    font-size:58px;
+
+}
+
+/* 每个字的位置 */
+
+.c1{left:90px;top:55px;transform:rotate(-26deg);}
+.c2{left:145px;top:38px;transform:rotate(-21deg);}
+.c3{left:205px;top:22px;transform:rotate(-16deg);}
+.c4{left:270px;top:10px;transform:rotate(-9deg);}
+.c5{left:345px;top:2px;transform:rotate(-3deg);}
+.c6{left:420px;top:0px;}
+
+.space{
+    width:40px;
+}
+
+.c7{left:505px;top:0px;}
+.c8{left:580px;top:2px;transform:rotate(3deg);}
+.c9{left:655px;top:10px;transform:rotate(9deg);}
+.c10{left:720px;top:22px;transform:rotate(16deg);}
+.c11{left:780px;top:38px;transform:rotate(21deg);}
+.c12{left:835px;top:55px;transform:rotate(26deg);}
+
+/* 第二排 */
+
+.table-line2{
+
+    position:absolute;
+
+    width:100%;
+
+    top:105px;
+
+    text-align:center;
+
+    color:#0F7759;
+
+    font-family:'Source Sans Pro';
+
+    font-size:30px;
+
+    font-weight:700;
+
+    letter-spacing:5px;
+
+}
+
+/* 第三排 */
+
+.table-line3{
+
+    position:absolute;
+
+    width:100%;
+
+    top:155px;
+
+    text-align:center;
+
+    color:#0F7759;
+
+    font-family:'Source Sans Pro';
+
+    font-size:22px;
+
+    letter-spacing:3px;
+
+}/* =========================
+   CASINO TABLE
+========================= */
+
+.casino-table {
+    position: relative;
+    width: 100%;
+    min-height: 900px;
+
+    background: #0B6E4F;
+
+    background-image:
+        radial-gradient(circle at 20% 25%, rgba(255,255,255,.03) 1px, transparent 2px),
+        radial-gradient(circle at 75% 70%, rgba(0,0,0,.04) 1px, transparent 2px),
+        repeating-linear-gradient(
+            45deg,
+            rgba(255,255,255,.015) 0px,
+            rgba(255,255,255,.015) 2px,
+            transparent 2px,
+            transparent 6px
+        );
+
+    box-shadow:
+        inset 0 0 120px rgba(0,0,0,.35);
+
+    }.table-logo{
+    position:absolute;
+    left:50%;
+    top:100px;
+    transform:translateX(-50%);
+    width:900px;
+    height:250px;
+    z-index:9999;
+}
+
+.table-logo span,
+.table-line2,
+.table-line3{
+    color:white !important;
+    opacity:1 !important;
+}
+
+.chip{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    display:inline-block;
+    margin:8px;
+    border:6px solid #fff;
+    box-shadow:0 2px 5px rgba(0,0,0,.3);
+}
+
+.red{
+    background:#d32f2f;
+}
+
+.green{
+    background:#2e7d32;
+}
+
+.blue{
+    background:#1976d2;
+}
+
+/* =========================
+   BLACKJACK GAME CENTER
+========================= */
+
+
+#game{
+    position:relative;
+    z-index:10;
+    text-align:center;
+    width:100%;
+}
+
+
+
+/* 只有牌变白 */
+
+#player,
+#dealer{
+    color:white;
+}
+
+
+
+/* 牌大小 */
+
+.cards{
+    color:white;
+    font-size:45px;
+    letter-spacing:15px;
+    height:120px;
+    text-align:center;
+}
+
+
+
+/* 结果文字也居中 */
+
+.result{
+    text-align:center;
+}
+
+#table{
+    position:relative;
+    z-index:5;
+    color:white;
+}

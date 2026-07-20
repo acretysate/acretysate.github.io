@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Online Slot Machine</title>
+
+<style>
+
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #111;
+    font-family: "Georgia", "Times New Roman", serif;
+}
+
+
+.container {
+    text-align: center;
+}
+
+
+h1 {
+    color: white;
+    letter-spacing: 5px;
+}
+
+
+/* 3x3老虎机 */
+
+.slot {
+    display: grid;
+    grid-template-columns: repeat(3,100px);
+    grid-template-rows: repeat(3,100px);
+    gap: 5px;
+    position: relative;
+}
+
+
+.box {
+    width:100px;
+    height:100px;
+    background:white;
+    border:3px solid black;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:45px;
+}
+
+
+/* 中间中奖线 */
+
+.slot::after {
+
+    content:"";
+
+    position:absolute;
+
+    left:-10px;
+    right:-10px;
+
+    top:calc(50% - 2px);
+
+    height:4px;
+
+    background:red;
+
+    pointer-events:none;
+}
+
+
+
+/* 按钮 */
+
+button {
+
+    margin-top:30px;
+
+    width:180px;
+    height:60px;
+
+    font-size:25px;
+
+    background:white;
+
+    border:3px solid black;
+
+    cursor:pointer;
+
+}
+
+
+button:hover {
+
+    background:#ddd;
+
+}
+
+
+#result {
+
+    color:white;
+
+    margin-top:20px;
+
+    font-size:25px;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+<div style="
+position:absolute;
+top:30px;
+left:50%;
+transform:translateX(-50%);
+color:white;
+font-size:35px;
+letter-spacing:8px;
+">
+ARTHUG CASINO
+</div>
+
+
+<h1>老虎机</h1>
+
+
+<div class="slot">
+
+<div class="box"></div>
+<div class="box"></div>
+<div class="box"></div>
+
+<div class="box"></div>
+<div class="box"></div>
+<div class="box"></div>
+
+<div class="box"></div>
+<div class="box"></div>
+<div class="box"></div>
+
+
+</div>
+
+
+<button onclick="spin()">SLOT(100$)</button>
+
+
+<div id="result"></div>
+
+
+</div>
+
+
+
+<script>
+
+let symbols = [
+"🍒",
+"🍋",
+"⭐",
+"💎",
+"7"
+];
+
+
+let boxes = document.querySelectorAll(".box");
+
+
+let spinning = false;
+
+
+
+function randomSymbol(){
+
+    return symbols[Math.floor(Math.random()*symbols.length)];
+
+}
+
+
+
+function spin(){
+
+
+if(spinning) return;
+
+spinning=true;
+
+
+let final=[];
+
+
+//60%中奖
+
+let win = Math.random() < 0.4;
+
+
+
+if(win){
+
+    let same=randomSymbol();
+
+    final=[
+    randomSymbol(),randomSymbol(),randomSymbol(),
+    same,same,same,
+    randomSymbol(),randomSymbol(),randomSymbol()
+    ];
+
+}
+
+else{
+
+
+    final=[];
+
+    for(let i=0;i<9;i++){
+
+        final.push(randomSymbol());
+
+    }
+
+
+    //避免中间三个一样
+
+    while(final[3]==final[4] && final[4]==final[5]){
+
+        final[5]=randomSymbol();
+
+    }
+
+}
+
+
+
+
+let count=0;
+
+
+//滚动动画
+
+let timer=setInterval(()=>{
+
+
+    for(let i=0;i<9;i++){
+
+        boxes[i].innerHTML=randomSymbol();
+
+    }
+
+
+    count++;
+
+
+
+    //滚动次数
+
+    if(count>=20){
+
+
+        clearInterval(timer);
+
+
+
+        //显示最终结果
+
+        for(let i=0;i<9;i++){
+
+            boxes[i].innerHTML=final[i];
+
+        }
+
+
+
+        if(win){
+
+            document.getElementById("result").innerHTML=
+            "恭喜你赢了200$";
+
+        }
+
+        else{
+
+            document.getElementById("result").innerHTML=
+            "输了100$再试一次";
+
+        }
+
+
+
+        spinning=false;
+
+    }
+
+
+
+},100);
+
+
+
+}
+
+
+</script>
+
+
+
+</body>
+</html>

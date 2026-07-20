@@ -1,0 +1,672 @@
+<section class="casino-table">
+<div class="table-logo">
+
+    <span class="c1">A</span>
+    <span class="c2">R</span>
+    <span class="c3">T</span>
+    <span class="c4">H</span>
+    <span class="c5">U</span>
+    <span class="c6">G</span>
+
+    <span class="space"></span>
+
+    <span class="c7">C</span>
+    <span class="c8">A</span>
+    <span class="c9">S</span>
+    <span class="c10">I</span>
+    <span class="c11">N</span>
+    <span class="c12">O</span>
+
+    <div class="table-line2">
+        BLACKJACK PAYS 3 TO 2
+    </div>
+
+    <div class="table-line3">
+        Dealer must stand on soft 17
+    </div>
+
+</div>
+<head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/casino.css">
+</head>
+
+<div class="chip red"></div>
+<div class="chip green"></div>
+<div class="chip blue"></div>
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Blackjack</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:Arial;
+background:white;
+}
+
+
+#game{
+text-align:center;
+}
+
+
+.cards{
+font-size:45px;
+letter-spacing:15px;
+height:60px;
+}
+
+
+button{
+padding:12px 30px;
+margin:10px;
+font-size:18px;
+cursor:pointer;
+}
+
+
+.hidden{
+font-size:45px;
+}
+
+
+#table{
+display:none;
+}
+
+
+#restart{
+display:none;
+}
+
+
+.result{
+font-size:25px;
+margin:20px;
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div id="game">
+
+
+<div id="menu">
+
+<h1>BLACKJACK</h1>
+
+<button onclick="startGame()">
+START
+</button>
+
+</div>
+
+
+
+<div id="table">
+
+
+<h1>BLACKJACK</h1>
+
+
+<h2>DEALER</h2>
+
+<div id="dealer" class="cards"></div>
+
+
+
+<h2>PLAYER</h2>
+
+<div id="player" class="cards"></div>
+
+
+
+<div id="buttons">
+
+<button onclick="hit()" id="hit">
+HIT
+</button>
+
+<button onclick="stand()" id="stand">
+STAND
+</button>
+
+<button onclick="doubleDown()" id="double">
+DOUBLE
+</button>
+
+<button onclick="split()" id="split">
+SPLIT
+</button>
+
+</div>
+
+
+
+<div id="result" class="result"></div>
+
+
+<button id="restart" onclick="startGame()">
+RESTART
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<script>
+
+
+const cards=[
+"A","2","3","4","5",
+"6","7","8","9","10",
+"J","Q","K"
+];
+
+
+let deck=[];
+
+let player=[];
+let dealer=[];
+
+let hidden=true;
+
+let finished=false;
+
+let firstTurn=true;
+
+
+
+function createDeck(){
+
+deck=[];
+
+for(let i=0;i<4;i++){
+
+cards.forEach(c=>deck.push(c));
+
+}
+
+}
+
+
+
+function draw(){
+
+let r=Math.floor(Math.random()*deck.length);
+
+return deck.splice(r,1)[0];
+
+}
+
+
+
+function cardValue(c){
+
+if(c==="J"||c==="Q"||c==="K")
+return 10;
+
+
+if(c==="A")
+return 11;
+
+
+return Number(c);
+
+}
+
+
+
+
+function count(cardsArray){
+
+let sum=0;
+let ace=0;
+
+
+cardsArray.forEach(c=>{
+
+sum+=cardValue(c);
+
+if(c==="A")
+ace++;
+
+});
+
+
+while(sum>21 && ace>0){
+
+sum-=10;
+
+ace--;
+
+}
+
+
+return sum;
+
+}
+
+
+
+
+function render(){
+
+
+document.getElementById("player").innerHTML=
+player.join(" ");
+
+
+
+let d="";
+
+
+dealer.forEach((c,i)=>{
+
+
+if(i===1 && hidden){
+
+d+="? ";
+
+}
+
+else{
+
+d+=c+" ";
+
+}
+
+
+});
+
+
+document.getElementById("dealer").innerHTML=d;
+
+
+}
+
+
+
+function addCard(who){
+
+
+return new Promise(resolve=>{
+
+
+setTimeout(()=>{
+
+
+if(who==="player")
+player.push(draw());
+
+else
+dealer.push(draw());
+
+
+render();
+
+resolve();
+
+
+},900);
+
+
+});
+
+}
+
+
+
+
+async function startGame(){
+
+
+document.getElementById("menu").style.display="none";
+
+document.getElementById("table").style.display="block";
+
+
+document.getElementById("restart").style.display="none";
+
+
+document.getElementById("result").innerHTML="";
+
+
+document.getElementById("buttons").style.display="block";
+
+
+
+createDeck();
+
+
+player=[];
+dealer=[];
+
+
+hidden=true;
+
+finished=false;
+
+firstTurn=true;
+
+
+
+document.getElementById("double").style.display="inline-block";
+
+document.getElementById("split").style.display="inline-block";
+
+
+
+await addCard("player");
+
+await addCard("dealer");
+
+await addCard("player");
+
+await addCard("dealer");
+
+
+
+checkBlackjack();
+
+
+}
+
+
+
+
+function checkBlackjack(){
+
+
+if(player.length===2 && count(player)===21){
+
+
+hidden=false;
+
+render();
+
+
+document.getElementById("result").innerHTML=
+"BLACKJACK - PLAYER WIN";
+
+
+end();
+
+
+}
+
+}
+
+
+
+
+function hit(){
+
+
+if(finished)
+return;
+
+
+
+firstTurn=false;
+
+
+hideOptions();
+
+
+
+addCard("player").then(()=>{
+
+
+let p=count(player);
+
+
+
+if(p>21){
+
+hidden=false;
+render();
+
+
+document.getElementById("result").innerHTML=
+"PLAYER BUST - DEALER WIN";
+
+
+end();
+
+
+}
+
+
+
+});
+
+
+}
+
+
+
+
+function stand(){
+
+
+if(finished)
+return;
+
+
+hidden=false;
+
+render();
+
+
+dealerTurn();
+
+
+}
+
+
+
+
+async function dealerTurn(){
+
+
+while(count(dealer)<17){
+
+
+await addCard("dealer");
+
+
+}
+
+
+checkWinner();
+
+
+}
+
+
+
+
+
+function doubleDown(){
+
+
+if(!firstTurn)
+return;
+
+
+hideOptions();
+
+
+addCard("player").then(()=>{
+
+
+if(count(player)>21){
+
+document.getElementById("result").innerHTML=
+"PLAYER BUST";
+
+}
+
+else{
+
+hidden=false;
+
+render();
+
+dealerTurn();
+
+}
+
+
+});
+
+
+}
+
+
+
+
+function split(){
+
+
+if(
+player.length===2 &&
+player[0]===player[1]
+){
+
+
+player.push(draw());
+
+render();
+
+
+}
+
+
+}
+
+
+
+
+
+function hideOptions(){
+
+document.getElementById("double")
+.style.display="none";
+
+
+document.getElementById("split")
+.style.display="none";
+
+
+}
+
+
+
+
+
+function checkWinner(){
+
+let p=count(player);
+let d=count(dealer);
+
+let text;
+
+
+// 玩家爆牌 永远输
+if(p>21){
+
+    text="PLAYER BUST - DEALER WIN";
+
+}
+
+
+// 庄家爆牌 玩家赢
+else if(d>21){
+
+    text="DEALER BUST - PLAYER WIN";
+
+}
+
+
+// 正常比较
+else if(p>d){
+
+    text="PLAYER WIN";
+
+}
+
+else if(p<d){
+
+    text="DEALER WIN";
+
+}
+
+else{
+
+    text="PUSH";
+
+}
+
+
+
+document.getElementById("result").innerHTML=text;
+
+
+end();
+
+}
+
+
+
+
+
+function end(){
+
+
+finished=true;
+
+
+document.getElementById("restart")
+.style.display="inline-block";
+
+
+document.getElementById("buttons")
+.style.display="none";
+
+
+}
+
+
+
+
+</script>
+
+
+</body>
+</html>
